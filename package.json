@@ -1,0 +1,39 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "Packages required to run my Liri Node App. Twitter, Node Spotify Api, Request.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulaura/liri-node-app.git"
+  },
+  "keywords": [
+    "liri",
+    "node",
+    "app",
+    "twitter",
+    "spotify",
+    "request",
+    "ulaura",
+    "\"liri",
+    "node",
+    "app\"",
+    "\"node",
+    "spotify",
+    "api\""
+  ],
+  "author": "Laura Unaeze",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ulaura/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/ulaura/liri-node-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.82.0",
+    "twitter": "^1.7.1"
+  }
+}
