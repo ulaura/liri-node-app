@@ -34,29 +34,73 @@ var userCommand = process.argv[2];
 
 
 //for the twitter calls
-//potential for later: change this part so the user is asked to input a twitter screen
-var myTweets = {screen_name: "LauraTest0714"};
+if (userCommand === "my-tweets") {
 
-twitter.get("statuses/user_timeline", myTweets, function(error, tweets, response){
-	if (userCommand === "my-tweets" && !error) {
+	//the twitter account that will be pulled up
+	//potential for later: change this part so the user is asked to input a twitter screen
+	var myTweets = {screen_name: "LauraTest0714"};
 
-		for (var i = 0; i < tweets.length; i++) {
+	twitter.get("statuses/user_timeline", myTweets, function(error, tweets, response){
 
-			//convert UTC time to local time for tweet timestamp part 1
-			var tweetDate = new Date(tweets[i].created_at);
+		if(error) {
+			return console.log(error);
 
-			console.log(tweets[i].text);
+		} else {
 
-			//convert UTC time to local time for tweet timestamp part 2
-			console.log(tweetDate.toString()); 
-			console.log("------------------------------------------");
+			for (var i = 0; i < tweets.length; i++) {
 
-			//console.log(JSON.stringify(tweets, null, 2)); << prints out entire response of call. saving for reference.
+				//convert UTC time to local time for tweet timestamp part 1
+				var tweetDate = new Date(tweets[i].created_at);
+
+				console.log(tweets[i].text);
+
+				//convert UTC time to local time for tweet timestamp part 2
+				console.log(tweetDate.toString()); 
+				console.log("------------------------------------------");
+
+				//console.log(JSON.stringify(tweets, null, 2)); << prints out entire response of call. saving for reference.
+			}
+
 		}
 
+
+	});
+
+}
+
+//for the spotify calls 
+else if (userCommand === "spotify-this-song") {
+
+	//the song that will be searched
+	var songChoice = "";
+
+	//if the user doesn't put in a song, the default will be Poker Face by Lady Gaga
+	if(!process.argv[3]) {
+		songChoice = "Bad Romance";
+
 	} else {
-		console.log(error);
+		//this accomodates songs with multiple words in it
+		for (i = 3; i < process.argv.length; i++) {
+		songChoice += process.argv[i] + " ";
+		}
 	}
-});
 
+	spotify.search({type: "track", query: songChoice, limit: 1}, function(error, response){
+		if (error) {
+			return console.log(error);
+		}
 
+		console.log(JSON.stringify(response, null, 2)); //<<keeping this for reference
+
+	});
+
+} 
+
+/*
+we need an else if block for the omdb search
+and another else if block for the do-what-it-says random search
+*/
+
+else {
+	return console.log("There was an error.");
+}
