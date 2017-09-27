@@ -1,5 +1,27 @@
-// to access the twitter keys in keys.js
-var twitter = require("./keys.js");
+// to access the keys in keys.js
+var keys = require("./keys.js");
+
+//to include the Twitter npm package
+var Twitter = require("twitter");
+
+//pulling the info from keys.js
+var twitter = new Twitter ({
+  	consumer_key: keys.twitterKeys.consumer_key,
+  	consumer_secret: keys.twitterKeys.consumer_secret,
+  	access_token_key: keys.twitterKeys.access_token_key,
+  	access_token_secret: keys.twitterKeys.access_token_secret
+});
+
+
+//to include the Node Spotify API npm package
+var Spotify = require('node-spotify-api');
+
+//pulling the info from keys.js
+var spotify = new Spotify({
+	id: keys.spotifyKeys.id,
+	secret: keys.spotifyKeys.secret
+});
+
 
 //this variable will be used to store user commands
 /*command options are as follows:
@@ -11,7 +33,8 @@ var twitter = require("./keys.js");
 var userCommand = process.argv[2];
 
 
-//working on twitter calls first
+//for the twitter calls
+//potential for later: change this part so the user is asked to input a twitter screen
 var myTweets = {screen_name: "LauraTest0714"};
 
 twitter.get("statuses/user_timeline", myTweets, function(error, tweets, response){
@@ -35,3 +58,5 @@ twitter.get("statuses/user_timeline", myTweets, function(error, tweets, response
 		console.log(error);
 	}
 });
+
+
