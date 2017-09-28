@@ -161,7 +161,7 @@ else if (userCommand === "movie-this") {
 
 
 /*
-we need an else if block for the do-what-it-says random search
+I need an else if block for the do-what-it-says random search.
 */
 
 //if the user forgets to put in a command for process.argv[2]
