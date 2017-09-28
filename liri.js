@@ -90,7 +90,15 @@ else if (userCommand === "spotify-this-song") {
 			return console.log(error);
 		}
 
-		console.log(JSON.stringify(response, null, 2)); //<<keeping this for reference
+		//printing out song information
+		for (j = 0; j < response.tracks.items[0].album.artists.length; j++) {
+			console.log("Artist(s): " + response.tracks.items[0].album.artists[j].name);
+			console.log("Song: " + response.tracks.items[0].name);
+			console.log("Song Link: " + response.tracks.items[0].external_urls.spotify);
+			console.log("Album: " + response.tracks.items[0].album.name);
+		}
+		
+		//console.log(JSON.stringify(response, null, 2)); //<<keeping this for reference
 
 	});
 
