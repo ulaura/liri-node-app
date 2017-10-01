@@ -33,6 +33,12 @@ var request = require('request');
 var omdbKey = "40e9cece";
 
 
+
+//to include the fs library
+var fs = require("fs");
+
+
+
 //this variable will be used to store user commands
 /*command options are as follows:
 	my-tweets
@@ -46,6 +52,72 @@ var userCommand = process.argv[2];
 //for the twitter calls
 if (userCommand === "my-tweets") {
 
+	twitterCall();
+}
+
+
+//for the spotify calls 
+else if (userCommand === "spotify-this-song") {
+
+	spotifyCall();
+
+}
+
+
+//for the open movie database (OMDB) calls
+else if (userCommand === "movie-this") {
+
+	movieCall();
+
+}
+
+
+
+//for the do-what-it-says call
+else if (userCommand === "do-what-it-says") {
+
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		if (error) {
+			return console.log(error);
+		} else {
+			
+			//splits whatever is in random.txt into strings.
+			//the split occurs wherever a comma exists.
+			//each split string is put into an index in an array call "theSplit"
+			var theSplit = data.split(",");
+
+			//if 
+			if (theSplit[0] === "spotify-this-song") {
+				songChoice = theSplit[1];
+				spotifyCall();
+			}
+
+			//console.log(data); //test
+			//console.log(theSplit); //test
+
+			
+		}
+
+
+	});
+	
+
+}
+
+
+//if the user forgets to put in a command for process.argv[2]
+else {
+	return console.log("There was an error.");
+}
+
+
+
+/*
+======== THE FUNCTIONS ========
+*/
+
+//function for the twitter calls
+function twitterCall() {
 	//the twitter account that will be pulled up
 	//potential for later: change this part so the user is asked to input a twitter screen
 	var myTweets = {screen_name: "LauraTest0714"};
@@ -76,11 +148,11 @@ if (userCommand === "my-tweets") {
 
 	});
 
-}
+};
 
-//for the spotify calls 
-else if (userCommand === "spotify-this-song") {
 
+//function for the spotify calls
+function spotifyCall() {
 	//the song that will be searched
 	var songChoice = "";
 
@@ -112,11 +184,10 @@ else if (userCommand === "spotify-this-song") {
 
 	});
 
-}
+};
 
-
-//for the open movie database (OMDB) calls
-else if (userCommand === "movie-this") {
+//function for the open movie database (OMDB) calls
+function movieCall() {
 
 	//variable to hold movie the user wants to search for
 	var omdbRequest = "";
@@ -157,14 +228,4 @@ else if (userCommand === "movie-this") {
 
 
 
-}
-
-
-/*
-I need an else if block for the do-what-it-says random search.
-*/
-
-//if the user forgets to put in a command for process.argv[2]
-else {
-	return console.log("There was an error.");
-}
+};
